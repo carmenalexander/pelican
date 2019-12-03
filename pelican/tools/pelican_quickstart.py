@@ -89,6 +89,7 @@ RSYNC_EXCLUDES = """\
 .DS_Store
 """
 
+
 def ask(question, answer=str, default=None, length=None):
     if answer == str:
         r = ''
