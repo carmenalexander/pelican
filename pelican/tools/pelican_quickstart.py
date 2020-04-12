@@ -82,6 +82,14 @@ class _DEFAULT_PATH_TYPE(str):
 _DEFAULT_PATH = _DEFAULT_PATH_TYPE(os.curdir)
 
 
+RSYNC_EXCLUDES = """\
+# Files to exclude with rsync(1) during publishing.
+# See the INCLUDE/EXCLUDE PATTERN RULES section of the rsync man page.
+
+.DS_Store
+"""
+
+
 def ask(question, answer=str, default=None, length=None):
     if answer == str:
         r = ''
@@ -344,6 +352,13 @@ needed by Pelican.
                 py_v = 'python3'
                 _template = _jinja_env.get_template('Makefile.jinja2')
                 fd.write(_template.render(py_v=py_v, **CONF))
+                fd.close()
+        except OSError as e:
+            print('Error: {0}'.format(e))
+        try:
+            with open(os.path.join(CONF['basedir'], 'rsync_excludes.txt'),
+                      'w', 'utf-8') as fd:
+                fd.write(RSYNC_EXCLUDES)
                 fd.close()
         except OSError as e:
             print('Error: {0}'.format(e))
