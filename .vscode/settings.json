@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "carmenalexander",
+        "projectKey": "carmenalexander_pelican"
+    }
+}
